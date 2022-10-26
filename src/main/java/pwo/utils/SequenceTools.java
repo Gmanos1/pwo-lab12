@@ -11,21 +11,34 @@ package pwo.utils;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class SequenceTools {
 
     private static String getTerms(SequenceGenerator sg,
             int from, int to, String sep) {
 
-        int i = from, stop = to, step = from > to ? -1 : 1;
-        String terms = "";
-
+        int i = from, stop = to;
+        boolean isReversed = from > to ? true : false;
+        
+        if(isReversed) {
+            int temp = from;
+            from = to;
+            to = temp;
+            i = from;
+            stop = to;
+        }
+        ArrayList<String> terms = new ArrayList<String>();
         while (true) {
-            terms += sg.getTerm(i) + sep;
+            terms.add(sg.getTerm(i).toString());
             if (i == stop) {
-                return terms.trim();
+                if(isReversed) {
+                    Collections.reverse(terms);
+                }
+                return String.join("\n", terms);
             }
-            i += step;
+            i += 1;
         }
     }
 

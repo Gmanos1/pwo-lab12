@@ -18,7 +18,7 @@ class SeqToFileApp {
     protected SeqType seqType = null;
     protected Integer from = null, to = null;
     protected String fileName = null;
-
+    
     protected boolean getArgs(String[] args) {
         try {
             seqType = SeqType.fromString(args[0]);

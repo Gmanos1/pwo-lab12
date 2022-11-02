@@ -19,24 +19,23 @@ public class SequenceTools {
     private static String getTerms(SequenceGenerator sg,
             int from, int to, String sep) {
 
-        int i = from, stop = to;
         boolean isReversed = from > to ? true : false;
-        
-        if(isReversed) {
+        if (isReversed) {
             int temp = from;
             from = to;
             to = temp;
-            i = from;
-            stop = to;
         }
+        
+        int i = from, stop = to;
+
         ArrayList<String> terms = new ArrayList<String>();
         while (true) {
             terms.add(sg.getTerm(i).toString());
             if (i == stop) {
-                if(isReversed) {
+                if (isReversed) {
                     Collections.reverse(terms);
                 }
-                return String.join("\n", terms);
+                return String.join(sep, terms);
             }
             i += 1;
         }
